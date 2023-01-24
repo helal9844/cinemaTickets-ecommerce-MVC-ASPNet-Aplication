@@ -1,3 +1,6 @@
+using cinemaTickets.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace cinemaTickets
 {
     public class Program
@@ -8,6 +11,11 @@ namespace cinemaTickets
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("Con1"))
+            );
 
             var app = builder.Build();
 
@@ -29,6 +37,8 @@ namespace cinemaTickets
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            AppDbInitializer.Seed(app);
 
             app.Run();
         }
