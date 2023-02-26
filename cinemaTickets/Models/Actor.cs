@@ -9,7 +9,7 @@
         public int Age { get; set; }
         public string BIO { get; set; } = "";
 
-        public List<ActorMovie> ActorMovies { get; set; }
+        public List<ActorMovie>? ActorMovies { get; set; }
 
         
     }

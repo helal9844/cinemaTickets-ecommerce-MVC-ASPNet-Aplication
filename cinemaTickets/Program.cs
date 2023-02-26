@@ -1,4 +1,6 @@
 using cinemaTickets.Data;
+using cinemaTickets.Models;
+using cinemaTickets.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace cinemaTickets
@@ -16,6 +18,7 @@ namespace cinemaTickets
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("Con1"))
             );
+            builder.Services.AddScoped<IActorsService,ActorsService>();
 
             var app = builder.Build();
 
@@ -38,7 +41,7 @@ namespace cinemaTickets
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            AppDbInitializer.Seed(app);
+
 
             app.Run();
         }
